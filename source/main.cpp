@@ -9,9 +9,10 @@
 r01lib_start;	/* *** place this word before making instance of r01lib classes *** */
 
 #include	"led/PCA9955B.h"
+#include	"led/PCA9957.h"
 
-//#define	I2C_DEMO
-#ifdef	I2C_DEMO
+#define	USE_PCA9955B
+#ifdef	USE_PCA9955B
 I2C			i2c;
 PCA9955B	ledd( i2c );
 #else
@@ -23,7 +24,7 @@ int main(void)
 {
 	PRINTF("\r***** Hello, PCA9955B! *****\r\n");
 
-#ifdef	I2C_DEMO
+#ifdef	USE_PCA9955B
 	I2C_device::scan( i2c, 124 ); //  Scan stop at 124
 	ledd.begin( 1.0, PCA9955B::ARDUINO_SHIELD );
 #else
