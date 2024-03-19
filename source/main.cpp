@@ -22,12 +22,14 @@ PCA9957		ledd( spi );
 
 int main(void)
 {
+#ifdef	USE_PCA9955B
 	PRINTF("\r***** Hello, PCA9955B! *****\r\n");
 
-#ifdef	USE_PCA9955B
 	I2C_device::scan( i2c, 124 ); //  Scan stop at 124
 	ledd.begin( 1.0, PCA9955B::ARDUINO_SHIELD );
 #else
+	PRINTF("\r***** Hello, PCA9957! *****\r\n");
+
 	ledd.begin( 1.0, PCA9957::ARDUINO_SHIELD );
 #endif
 
